@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>Pretty Girl ✨</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chewy&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink:#f6c9d6; --pink-deep:#e79bb2; --blush:#fbe4ea; --cream:#fff6f2;
+    --gold:#caa24a; --gold-lite:#f0d998; --gold-deep:#9c7a2e; --ink:#7a4a56;
+    --display:'Chewy','Baloo 2',cursive;
+    --body:'Quicksand','Segoe UI',sans-serif;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;text-align:center;}
+  html,body{margin:0;height:100%;}
+  body{
+    font-family:var(--body);color:var(--ink);font-weight:500;
+    background:
+      radial-gradient(120% 90% at 50% -10%, var(--blush), transparent 60%),
+      repeating-linear-gradient(45deg,#fbe0e8 0 18px,#fceef2 18px 36px),
+      repeating-linear-gradient(-45deg,rgba(255,255,255,.5) 0 18px,transparent 18px 36px);
+    min-height:100%;display:flex;flex-direction:column;align-items:center;
+    padding:22px 14px 40px;overflow-x:hidden;
+  }
+  h1{font-family:var(--display);font-weight:400;font-size:clamp(42px,13vw,74px);
+    margin:0;color:var(--pink-deep);line-height:1;letter-spacing:.5px;
+    text-shadow:0 2px 0 #fff,0 4px 0 rgba(231,155,178,.35),0 6px 12px rgba(231,155,178,.45);}
+  .subtitle{font-family:var(--body);font-weight:600;font-size:13px;letter-spacing:.24em;
+    text-transform:uppercase;color:var(--gold-deep);opacity:.85;margin:10px 0 18px;}
+
+  /* ---- ornate HANDHELD mirror ---- */
+  .mirror-wrap{position:relative;width:min(78vw,320px);display:flex;justify-content:center;}
+  .hand-mirror{position:relative;width:100%;display:flex;flex-direction:column;align-items:center;
+    filter:drop-shadow(0 16px 22px rgba(122,74,86,.35));}
+
+  /* the round mirror head */
+  .head{position:relative;width:100%;aspect-ratio:1/1;z-index:2;}
+  .frame{position:absolute;inset:0;border-radius:50%;padding:20px;
+    background:
+      conic-gradient(from 45deg,
+        var(--gold-deep),var(--gold-lite) 8%,var(--gold) 18%,var(--gold-deep) 30%,
+        var(--gold-lite) 44%,var(--gold) 55%,var(--gold-deep) 68%,
+        var(--gold-lite) 82%,var(--gold) 92%,var(--gold-deep));
+    box-shadow:
+      0 0 0 3px var(--gold-deep),
+      inset 0 0 14px rgba(255,255,255,.65),
+      inset 0 0 0 3px var(--gold-lite);}
+  /* scalloped/beaded outer edge for the ornate look */
+  .frame::before{content:"";position:absolute;inset:-9px;border-radius:50%;z-index:-1;
+    background:radial-gradient(circle at 50% 50%, transparent 62%, var(--gold) 63%);
+    -webkit-mask:radial-gradient(circle at 50% 50%, transparent 62%, #000 63%);
+    background:
+      repeating-conic-gradient(from 0deg,
+        var(--gold-deep) 0 6deg, var(--gold-lite) 6deg 12deg);
+    box-shadow:0 0 0 2px var(--gold-deep);}
+  /* inner engraved bead ring */
+  .frame::after{content:"";position:absolute;inset:12px;border-radius:50%;
+    box-shadow:inset 0 0 0 2px var(--gold-lite), inset 0 0 12px var(--gold-deep),
+      0 0 0 2px var(--gold-deep);}
+  .glass{position:absolute;inset:20px;border-radius:50%;overflow:hidden;
+    background:radial-gradient(120% 120% at 30% 20%,#fff,var(--blush) 70%);
+    box-shadow:inset 0 0 22px rgba(231,155,178,.55);}
+  video{width:100%;height:100%;object-fit:cover;transform:scaleX(-1);opacity:0;transition:opacity .9s ease;}
+  video.live{opacity:1;}
+  .glass canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
+  #smoke{mix-blend-mode:screen;}
+
+  /* the decorative handle */
+  .handle{position:relative;width:20%;margin-top:-4px;display:flex;flex-direction:column;align-items:center;z-index:1;}
+  .collar{width:150%;height:26px;border-radius:0 0 50% 50%/0 0 100% 100%;
+    background:linear-gradient(90deg,var(--gold-deep),var(--gold-lite),var(--gold),var(--gold-deep));
+    box-shadow:inset 0 2px 4px rgba(255,255,255,.5),0 2px 4px rgba(122,74,86,.3);}
+  .grip{width:64%;height:120px;border-radius:0 0 40% 40%;
+    background:linear-gradient(90deg,var(--gold-deep) 0%,var(--gold-lite) 30%,var(--gold) 55%,var(--gold-deep) 100%);
+    box-shadow:inset 2px 0 3px rgba(255,255,255,.45),inset -2px 0 4px rgba(122,74,86,.35);
+    position:relative;}
+  /* ornamental ridges along the grip */
+  .grip::before{content:"";position:absolute;inset:0;border-radius:0 0 40% 40%;
+    background:repeating-linear-gradient(0deg,transparent 0 16px,rgba(122,74,86,.18) 16px 18px);}
+  .finial{width:130%;height:44px;border-radius:50%;margin-top:-6px;
+    background:radial-gradient(circle at 40% 35%,var(--gold-lite),var(--gold) 55%,var(--gold-deep));
+    box-shadow:0 3px 6px rgba(122,74,86,.4),inset 0 2px 4px rgba(255,255,255,.55);}
+
+  .deco{position:absolute;font-size:32px;filter:drop-shadow(0 2px 2px rgba(122,74,86,.3));pointer-events:none;z-index:4;}
+  .bow-top{top:-20px;left:50%;transform:translateX(-50%);font-size:46px;}
+  .rose-1{top:6%;left:-4px;} .rose-2{top:6%;right:-4px;}
+
+  .veil{position:absolute;inset:20px;border-radius:50%;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:14px;padding:0 20px;
+    background:radial-gradient(120% 120% at 50% 30%,#fff,var(--blush));z-index:3;}
+  .veil p{margin:0;font-size:15px;color:var(--ink);}
+  .peek{font-family:var(--display);font-size:30px;color:var(--pink-deep);}
+
+  button{font-family:var(--body);font-weight:700;cursor:pointer;border:none;}
+  .btn{background:linear-gradient(180deg,#fff,var(--pink));color:var(--pink-deep);padding:12px 24px;
+    border-radius:999px;font-size:16px;box-shadow:0 3px 0 var(--pink-deep),0 8px 18px rgba(231,155,178,.5);transition:transform .08s;}
+  .btn:active{transform:translateY(3px);box-shadow:0 0 0 var(--pink-deep),0 4px 10px rgba(231,155,178,.4);}
+  .btn.small{padding:9px 18px;font-size:14px;}
+
+  .controls{display:flex;gap:16px;align-items:center;justify-content:center;margin-top:22px;}
+  .snap{width:74px;height:74px;border-radius:50%;font-size:30px;
+    background:radial-gradient(circle at 35% 30%,#fff,var(--pink) 65%,var(--pink-deep));
+    box-shadow:0 0 0 4px #fff,0 0 0 7px var(--gold-lite),0 8px 16px rgba(231,155,178,.55);}
+  .snap:active{transform:scale(.92);}
+
+  .card{width:min(92vw,440px);margin-top:26px;background:rgba(255,255,255,.55);
+    border:1px solid rgba(202,162,74,.35);border-radius:22px;padding:20px 16px;
+    box-shadow:0 6px 18px rgba(122,74,86,.12);backdrop-filter:blur(2px);}
+  .card h2{font-family:var(--display);font-weight:400;color:var(--pink-deep);
+    font-size:30px;margin:0 0 2px;}
+  .card .sub{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:16px;}
+
+  .lock{display:flex;flex-direction:column;gap:12px;align-items:center;}
+  .lock input{font-family:var(--body);font-weight:600;font-size:16px;padding:11px 14px;border-radius:12px;
+    border:2px solid var(--pink);background:#fff;color:var(--ink);width:100%;max-width:260px;}
+  .lock .msg{font-size:13px;color:#c05a72;min-height:18px;}
+  .hint{font-size:12px;color:var(--gold-deep);opacity:.85;line-height:1.5;max-width:300px;}
+
+  .toolbar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:16px;}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+  .grid figure{margin:0;position:relative;aspect-ratio:3/4;border-radius:14px;overflow:hidden;background:var(--blush);
+    box-shadow:0 0 0 3px #fff,0 0 0 4px var(--gold-lite),0 4px 10px rgba(122,74,86,.2);}
+  .grid img{width:100%;height:100%;object-fit:cover;}
+  .grid figure.mirror img{transform:scaleX(-1);}
+  .grid .x{position:absolute;top:3px;right:3px;width:22px;height:22px;border-radius:50%;
+    background:rgba(255,255,255,.9);color:var(--pink-deep);font-size:13px;line-height:22px;}
+  .empty{color:var(--ink);opacity:.75;font-size:14px;padding:22px;
+    border:2px dashed var(--pink);border-radius:16px;background:rgba(255,255,255,.4);grid-column:1/-1;}
+  .status{font-size:13px;color:var(--gold-deep);min-height:18px;margin-top:12px;}
+
+  .tray{width:min(92vw,440px);margin-top:18px;}
+  .tray h3{font-family:var(--display);font-weight:400;font-size:20px;color:var(--pink-deep);margin:0 0 10px;}
+  .tray .row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;}
+  .tray .row figure{margin:0;flex:0 0 auto;width:70px;aspect-ratio:3/4;border-radius:10px;overflow:hidden;position:relative;
+    box-shadow:0 0 0 2px #fff,0 0 0 3px var(--pink);}
+  .tray .row img{width:100%;height:100%;object-fit:cover;transform:scaleX(-1);}
+  .tray .save{position:absolute;inset:auto 0 0 0;background:rgba(231,155,178,.92);color:#fff;font-size:11px;
+    border:none;padding:3px 0;width:100%;}
+  .tray .saved{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    background:rgba(255,255,255,.55);font-size:22px;color:var(--pink-deep);}
+  input[type=file]{display:none;}
+  .note{font-size:11px;color:var(--gold-deep);margin-top:16px;opacity:.85;line-height:1.5;max-width:340px;}
+</style>
+</head>
+<body>
+  <h1>Pretty Girl</h1>
+  <div class="subtitle">✦ for Evelyn ✦</div>
+
+  <div class="mirror-wrap">
+    <div class="hand-mirror">
+      <div class="deco bow-top">🎀</div>
+      <div class="deco rose-1">🌹</div>
+      <div class="deco rose-2">🌷</div>
+      <div class="head">
+        <div class="frame"></div>
+        <div class="glass">
+          <video id="video" playsinline autoplay muted></video>
+          <canvas id="smoke"></canvas>
+          <canvas id="sparkle"></canvas>
+          <div class="veil" id="veil">
+            <div class="peek">peek inside ✨</div>
+            <p>Tap to wake the magic mirror.</p>
+            <button class="btn" id="start">Look in the mirror</button>
+          </div>
+        </div>
+      </div>
+      <div class="handle">
+        <div class="collar"></div>
+        <div class="grip"></div>
+        <div class="finial"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="snap" id="snap" title="Take a photo" hidden>📸</button>
+  </div>
+
+  <section class="tray" id="tray" hidden>
+    <h3>Just taken</h3>
+    <div class="row" id="trayRow"></div>
+  </section>
+
+  <section class="card" id="albumCard">
+    <h2>Family Album</h2>
+    <div class="sub">for family • password protected</div>
+
+    <div class="lock" id="lock">
+      <p style="margin:0;font-size:14px;">Enter the family password to open the album.</p>
+      <input id="pw" type="password" inputmode="text" placeholder="password" autocomplete="off" />
+      <button class="btn small" id="unlock">Open album</button>
+      <div class="msg" id="lockMsg"></div>
+      <div class="hint">Only people with this password can view or add photos. Share it like a house key — with family, not publicly.</div>
+    </div>
+
+    <div id="albumBody" hidden>
+      <div class="toolbar">
+        <button class="btn small" id="addPhotos">＋ Add photos from phone</button>
+        <button class="btn small" id="refresh">↻ Refresh</button>
+      </div>
+      <input id="fileInput" type="file" accept="image/*" multiple />
+      <div class="grid" id="grid"></div>
+      <div class="status" id="status"></div>
+    </div>
+  </section>
+
+  <div class="note">Photos are stored privately and shown through links that expire, so a stray link can't stay open forever.</div>
+
+<script>
+/* ======================================================================
+   YOUR SUPABASE FUNCTION URL (already set)
+   ====================================================================== */
+const FUNCTION_URL = "https://klkvgojdkcrznjpmsxzk.supabase.co/functions/v1/album";
+/* ====================================================================== */
+
+const $ = (id) => document.getElementById(id);
+const video=$("video"), veil=$("veil"), startBtn=$("start"), snapBtn=$("snap");
+const smoke=$("smoke"), sparkle=$("sparkle");
+const sctx=smoke.getContext("2d"), pctx=sparkle.getContext("2d");
+const lock=$("lock"), pwInput=$("pw"), unlockBtn=$("unlock"), lockMsg=$("lockMsg");
+const albumBody=$("albumBody"), grid=$("grid"), statusEl=$("status");
+const tray=$("tray"), trayRow=$("trayRow");
+const fileInput=$("fileInput");
+
+let sessionPassword = null;
+const pending = [];
+
+async function api(action, extra={}){
+  if(FUNCTION_URL.includes("YOUR-PROJECT-ref"))
+    throw new Error("Set FUNCTION_URL at the top of the file first.");
+  const res = await fetch(FUNCTION_URL, {
+    method:"POST",
+    headers:{ "Content-Type":"application/json" },
+    body: JSON.stringify({ action, password: sessionPassword, ...extra }),
+  });
+  const data = await res.json().catch(()=>({error:"Bad response"}));
+  if(!res.ok) throw new Error(data.error || ("Error "+res.status));
+  return data;
+}
+
+function resize(source, maxSide=1600){
+  return new Promise((resolve)=>{
+    const draw=(w,h,img)=>{
+      const scale=Math.min(1, maxSide/Math.max(w,h));
+      const cw=Math.round(w*scale), ch=Math.round(h*scale);
+      const c=document.createElement("canvas"); c.width=cw; c.height=ch;
+      c.getContext("2d").drawImage(img,0,0,cw,ch);
+      resolve(c.toDataURL("image/jpeg",0.85));
+    };
+    if(source instanceof HTMLVideoElement){
+      const c=document.createElement("canvas"); c.width=source.videoWidth; c.height=source.videoHeight;
+      c.getContext("2d").drawImage(source,0,0);
+      const img=new Image(); img.onload=()=>draw(img.width,img.height,img); img.src=c.toDataURL("image/jpeg",0.92);
+    }else{
+      const img=new Image();
+      img.onload=()=>{ URL.revokeObjectURL(img.src); draw(img.width,img.height,img); };
+      img.src=URL.createObjectURL(source);
+    }
+  });
+}
+
+unlockBtn.addEventListener("click", tryUnlock);
+pwInput.addEventListener("keydown",(e)=>{ if(e.key==="Enter") tryUnlock(); });
+async function tryUnlock(){
+  const pw=pwInput.value.trim();
+  if(!pw){ lockMsg.textContent="Type the password first."; return; }
+  unlockBtn.disabled=true; lockMsg.textContent="Opening…";
+  sessionPassword=pw;
+  try{
+    const {photos}=await api("list");
+    lock.hidden=true; albumBody.hidden=false;
+    renderAlbum(photos); renderTray();
+  }catch(err){
+    sessionPassword=null;
+    lockMsg.textContent = /password/i.test(err.message) ? "That password didn't work." : err.message;
+  }finally{ unlockBtn.disabled=false; }
+}
+
+function renderAlbum(photos){
+  grid.innerHTML="";
+  if(!photos.length){ grid.innerHTML='<div class="empty">No photos yet — snap one in the mirror or add from your phone! 💕</div>'; return; }
+  photos.forEach((p)=>{
+    const fig=document.createElement("figure");
+    const img=document.createElement("img"); img.src=p.url; img.alt="";
+    const x=document.createElement("button"); x.className="x"; x.textContent="×"; x.title="Remove";
+    x.onclick=async()=>{
+      if(!confirm("Remove this photo for everyone?")) return;
+      x.textContent="…";
+      try{ await api("delete",{path:p.name}); fig.remove();
+        if(!grid.children.length) renderAlbum([]);
+      }catch(e){ x.textContent="×"; setStatus(e.message); }
+    };
+    fig.append(img,x); grid.appendChild(fig);
+  });
+}
+function setStatus(t){ statusEl.textContent=t||""; if(t) setTimeout(()=>{ if(statusEl.textContent===t) statusEl.textContent=""; },4000); }
+
+async function uploadDataUrl(dataUrl){ const {photo}=await api("upload",{file:dataUrl}); return photo; }
+async function reload(){ try{ const {photos}=await api("list"); renderAlbum(photos);}catch(e){ setStatus(e.message);} }
+
+$("refresh").addEventListener("click", reload);
+$("addPhotos").addEventListener("click", ()=>fileInput.click());
+fileInput.addEventListener("change", async (e)=>{
+  const files=[...e.target.files]; e.target.value="";
+  if(!files.length) return;
+  setStatus(`Adding ${files.length} photo${files.length>1?"s":""}…`);
+  let ok=0;
+  for(const f of files){
+    try{ const d=await resize(f); await uploadDataUrl(d); ok++; setStatus(`Added ${ok} of ${files.length}…`); }
+    catch(err){ setStatus(err.message); }
+  }
+  await reload(); setStatus(`Added ${ok} photo${ok!==1?"s":""}. 💕`);
+});
+
+function renderTray(){
+  tray.hidden = pending.length===0;
+  trayRow.innerHTML="";
+  pending.forEach((item)=>{
+    const fig=document.createElement("figure");
+    const img=document.createElement("img"); img.src=item.dataUrl; img.alt="";
+    fig.appendChild(img);
+    if(item.savedName){
+      const s=document.createElement("div"); s.className="saved"; s.textContent="✓"; fig.appendChild(s);
+    }else{
+      const b=document.createElement("button"); b.className="save";
+      b.textContent = sessionPassword ? "＋ album" : "unlock";
+      b.onclick=async()=>{
+        if(!sessionPassword){ pwInput.focus(); setStatus("Open the album first (password below)."); return; }
+        b.textContent="…";
+        try{ const photo=await uploadDataUrl(item.dataUrl); item.savedName=photo.name; renderTray(); reload(); }
+        catch(err){ b.textContent="＋ album"; setStatus(err.message); }
+      };
+      fig.appendChild(b);
+    }
+    trayRow.appendChild(fig);
+  });
+}
+
+function fit(c){ const r=c.getBoundingClientRect(); c.width=r.width; c.height=r.height; }
+function fitAll(){ fit(smoke); fit(sparkle); }
+window.addEventListener("resize", fitAll);
+
+function chime(){
+  try{
+    const AC=window.AudioContext||window.webkitAudioContext; const ac=new AC();
+    const now=ac.currentTime;
+    // ascending harp/wand shimmer — a quick sparkle rushing upward (C major pentatonic)
+    const base=[523.25,587.33,659.25,783.99,880.0]; // C5 D5 E5 G5 A5
+    const notes=[];
+    for(let o=0;o<3;o++) base.forEach(f=>notes.push(f*Math.pow(2,o)));
+    notes.push(4186.01); // top sparkle
+    const step=0.042;
+    notes.forEach((f,i)=>{
+      const t=now+i*step;
+      const o=ac.createOscillator(), g=ac.createGain();
+      o.type="triangle"; o.frequency.value=f;
+      g.gain.setValueAtTime(0,t);
+      g.gain.linearRampToValueAtTime(0.17,t+0.008);
+      g.gain.exponentialRampToValueAtTime(0.0001,t+0.5);
+      o.connect(g).connect(ac.destination); o.start(t); o.stop(t+0.55);
+    });
+    // twinkle tail — a few random high sparkles after the run
+    const tail=now+notes.length*step;
+    for(let i=0;i<6;i++){
+      const t=tail+Math.random()*0.45;
+      const o=ac.createOscillator(), g=ac.createGain();
+      o.type="sine"; o.frequency.value=2000+Math.random()*2600;
+      g.gain.setValueAtTime(0,t);
+      g.gain.linearRampToValueAtTime(0.10,t+0.005);
+      g.gain.exponentialRampToValueAtTime(0.0001,t+0.35);
+      o.connect(g).connect(ac.destination); o.start(t); o.stop(t+0.4);
+    }
+  }catch(e){}
+}
+
+let puffs=[], sparks=[], anim=null;
+function seedSmoke(){ puffs=[]; for(let i=0;i<16;i++) puffs.push({
+  x:Math.random(),y:1+Math.random()*0.4,r:40+Math.random()*70,
+  s:0.0006+Math.random()*0.0011,a:0.10+Math.random()*0.14,drift:(Math.random()-.5)*0.0008}); }
+function addSpark(){ sparks.push({x:Math.random(),y:Math.random(),life:0,max:60+Math.random()*40,
+  size:2+Math.random()*3,hue:Math.random()<.5?"#fff":"#ffd7e6"}); }
+function loop(){
+  sctx.clearRect(0,0,smoke.width,smoke.height);
+  puffs.forEach(p=>{ p.y-=p.s; p.x+=p.drift; if(p.y<-0.2){p.y=1.2;p.x=Math.random();}
+    const gx=p.x*smoke.width, gy=p.y*smoke.height;
+    const g=sctx.createRadialGradient(gx,gy,0,gx,gy,p.r);
+    g.addColorStop(0,`rgba(255,240,246,${p.a})`); g.addColorStop(1,"rgba(255,240,246,0)");
+    sctx.fillStyle=g; sctx.beginPath(); sctx.arc(gx,gy,p.r,0,7); sctx.fill(); });
+  pctx.clearRect(0,0,sparkle.width,sparkle.height);
+  if(Math.random()<0.35) addSpark();
+  sparks.forEach(s=>{ s.life++; const t=s.life/s.max, alpha=Math.sin(Math.PI*t);
+    const x=s.x*sparkle.width, y=s.y*sparkle.height - s.life*0.35;
+    pctx.save(); pctx.globalAlpha=Math.max(0,alpha); pctx.fillStyle=s.hue; pctx.translate(x,y);
+    pctx.beginPath(); for(let k=0;k<4;k++){ pctx.rotate(Math.PI/2); pctx.lineTo(0,-s.size*3); pctx.lineTo(s.size,-s.size);} pctx.fill();
+    pctx.globalAlpha=Math.max(0,alpha)*0.6; pctx.beginPath(); pctx.arc(0,0,s.size,0,7); pctx.fill(); pctx.restore(); });
+  sparks=sparks.filter(s=>s.life<s.max);
+  anim=requestAnimationFrame(loop);
+}
+
+startBtn.addEventListener("click", async ()=>{
+  startBtn.disabled=true; startBtn.textContent="Waking up…";
+  try{
+    const stream=await navigator.mediaDevices.getUserMedia({
+      video:{ facingMode:"user", width:{ideal:1280}, height:{ideal:1280} }, audio:false });
+    video.srcObject=stream; await video.play().catch(()=>{});
+    veil.style.transition="opacity .7s"; veil.style.opacity="0"; setTimeout(()=>veil.remove(),700);
+    video.classList.add("live"); snapBtn.hidden=false;
+    fitAll(); seedSmoke(); chime(); if(!anim) loop();
+  }catch(err){
+    startBtn.disabled=false; startBtn.textContent="Try again";
+    veil.querySelector("p").textContent="The mirror needs camera permission to show your reflection. Tap try again and allow the camera. 💕";
+  }
+});
+
+snapBtn.addEventListener("click", async ()=>{
+  if(!video.videoWidth) return;
+  for(let i=0;i<24;i++) addSpark(); chime();
+  snapBtn.animate([{transform:"scale(1)"},{transform:"scale(1.25)"},{transform:"scale(1)"}],{duration:280,easing:"ease-out"});
+  const dataUrl=await resize(video);
+  const item={dataUrl,savedName:null};
+  pending.unshift(item); renderTray();
+  if(sessionPassword){
+    try{ const photo=await uploadDataUrl(dataUrl); item.savedName=photo.name; renderTray(); reload(); }
+    catch(err){ setStatus(err.message); }
+  }
+});
+
+renderTray();
+</script>
+</body>
+</html>
